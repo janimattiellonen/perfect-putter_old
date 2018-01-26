@@ -36,7 +36,8 @@ const Main = ({ round, scores, setText, text }) => {
             </View>
 
             <View style={styles.container}>
-                <Text>First in!</Text>
+                <Text>First in +2</Text>
+                <Text>Last in +2</Text>
             </View>
 
             <View style={styles.container}>
@@ -63,6 +64,8 @@ const styles = StyleSheet.create({
      width: '25%',
      height: 50,
      margin: 0,
+     justifyContent: 'center',
+     alignItems: 'center',
     },
 
     scoreContainer: {
