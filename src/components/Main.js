@@ -1,13 +1,18 @@
 import React from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { CheckBox } from 'react-native-elements';
 
-const Main = ({ round, scores, setText, text }) => {
-    const getValue = (distance) => {
-        console.log("text: " + text);
-        console.log(JSON.stringify(scores));
-        return scores[round][distance].toString();
-    }
-    console.log("ddd: " + text);
+const Main = ({ 
+    round, 
+    scores, 
+    setAllMade,
+    setText, 
+    text,
+ }) => {
+    const getValue = (distance) => scores.get(String(round)).get(String(distance)).score.toString();
+    const getPuttsMade = (distance) => scores.get(String(round)).get(String(distance)).puttsMade.toString();
+    const isAllIn = (distance) => scores.get(String(round)).get(String(distance)).allIn;
+
     return (
         
         <View style={{
@@ -27,8 +32,8 @@ const Main = ({ round, scores, setText, text }) => {
                     title="-"
                 />
                 <TextInput 
-                    style={styles.textInput} 
-                    value={getValue(10)}
+                    style={[styles.textInput, styles.largeText]} 
+                    value={getPuttsMade(10)}
                 />  
                 <Button
                     title="+"
@@ -40,14 +45,25 @@ const Main = ({ round, scores, setText, text }) => {
                 <Text>Last in +2</Text>
             </View>
 
-            <View style={styles.container}>
+            <View style={[styles.containerm, styles.allMade]}>
                 <Text>All made +5</Text>
+
+                <CheckBox 
+                    checked={false} 
+                    containerStyle={{
+                        backgroundColor: 'transparent', 
+                        borderColor: 'transparent',
+                        height: 10,
+                    }}
+                    onPress={() => setAllMade(round, 10)}
+                    checked={isAllIn(10)}
+                />
             </View>
 
             <View style={styles.container}>
-                <Text>19</Text>
+                <Text style={styles.largeText}>{getValue(10)}</Text>
             </View>
-           
+  
         </View>
     );
 }
@@ -78,9 +94,17 @@ const styles = StyleSheet.create({
 
     textInput: {
         backgroundColor: 'blue', 
-        fontSize: 30,
         width: '50%',
         flexBasis: 'auto',
+    },
+
+    largeText: {
+        fontSize: 30,
+    },
+
+    allMade: {
+        flexDirection: 'column',
+        backgroundColor: 'white',
     }
   });
 

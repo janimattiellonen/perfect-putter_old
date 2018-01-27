@@ -2,7 +2,7 @@ import { bindACtorCreators } from 'redux';
 import { connect } from 'react-redux';
 import Main from '../components/Main';
 import { bindActionCreators } from 'redux';
-import { setText } from '../ducks/game';
+import { setAllMade, setText } from '../ducks/game';
 
 export default connect(
     state => ({
@@ -11,6 +11,7 @@ export default connect(
         scores: state.game.get('scores'),
     }),
     dispatch => bindActionCreators({
+        setAllMade,
         setText,
     }, dispatch),
 )(Main);
