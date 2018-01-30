@@ -1,5 +1,7 @@
 import { Map } from 'immutable';
 
+const DECREASE_SCORE = 'GAME/DECREASE_SCORE';
+const INCREASE_SCORE = 'GAME/INCREASE_SCORE';
 const SET_TEXT = 'GAME/SET_TEXT';
 const SET_ALL_MADE = 'GAME/SET_ALL_MADE';
 
@@ -60,8 +62,30 @@ export function setAllMade (round, distance) {
     };
 }
 
+export function decreaseScore(round, distance) {
+    return {
+        type: DECREASE_SCORE,
+        payload: {
+            round,
+            distance,
+        }
+    }
+}
+
+export function increaseScore(round, distance) {
+    return {
+        type: INCREASE_SCORE,
+        payload: {
+            round,
+            distance,
+        }
+    }
+}
+
 export default (state = initialState, action = {}) => {
     switch (action.type) {
+        case DECREASE_SCORE:
+            
         case SET_TEXT:
             return state.
                 set('text', action.payload);

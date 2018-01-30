@@ -13,8 +13,53 @@ const Main = ({
     const getPuttsMade = (distance) => scores.get(String(round)).get(String(distance)).puttsMade.toString();
     const isAllIn = (distance) => scores.get(String(round)).get(String(distance)).allIn;
 
+    const renderPuttsMade = (distance) => (
+        <View style={[styles.container, styles.scoreContainer]}>
+                <Button 
+                    style={styles.btn}
+                    title="-"
+                />
+                <TextInput 
+                    style={[styles.textInput, styles.largeText]} 
+                    value={getPuttsMade(distance)}
+                />  
+                <Button
+                    title="+"
+                />
+            </View>
+    );
+
+    const renderFirstAndLastMade = (distance) => (
+        <View style={styles.container}>
+            <Text>First in +2</Text>
+            <Text>Last in +2</Text>
+        </View>
+    );
+
+    const renderAllMade = (distance) => (
+        <View style={[styles.containerm, styles.allMade]}>
+            <Text>All made +5</Text>
+
+            <CheckBox 
+                checked={false} 
+                containerStyle={{
+                    backgroundColor: 'transparent', 
+                    borderColor: 'transparent',
+                    height: 10,
+                }}
+                onPress={() => setAllMade(round, 10)}
+                checked={isAllIn(distance)}
+            />
+        </View>
+    );
+
+    const renderScore = (distance) => (
+        <View style={styles.container}>
+        <Text style={styles.largeText}>{getValue(distance)}</Text>
+    </View>
+    );
+    
     return (
-        
         <View style={{
             flex: 1, 
             flexDirection: 'row', 
@@ -26,44 +71,19 @@ const Main = ({
             borderColor: 'black',
             width: '100%',
         }}>
-            <View style={[styles.container, styles.scoreContainer]}>
-                <Button 
-                    style={styles.btn}
-                    title="-"
-                />
-                <TextInput 
-                    style={[styles.textInput, styles.largeText]} 
-                    value={getPuttsMade(10)}
-                />  
-                <Button
-                    title="+"
-                />
-            </View>
+            {[10, 15, 20, 25, 30].map ((distance) => {
+                return (
+                    <View>
+                        {renderPuttsMade(distance)}
 
-            <View style={styles.container}>
-                <Text>First in +2</Text>
-                <Text>Last in +2</Text>
-            </View>
+                        {renderFirstAndLastMade(distance)}
 
-            <View style={[styles.containerm, styles.allMade]}>
-                <Text>All made +5</Text>
+                        {renderAllMade(distance)}
 
-                <CheckBox 
-                    checked={false} 
-                    containerStyle={{
-                        backgroundColor: 'transparent', 
-                        borderColor: 'transparent',
-                        height: 10,
-                    }}
-                    onPress={() => setAllMade(round, 10)}
-                    checked={isAllIn(10)}
-                />
-            </View>
-
-            <View style={styles.container}>
-                <Text style={styles.largeText}>{getValue(10)}</Text>
-            </View>
-  
+                        {renderScore(distance)}
+                    </View>
+                    )
+            })}
         </View>
     );
 }
