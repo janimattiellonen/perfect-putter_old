@@ -47,7 +47,7 @@ const Main = ({
                     borderColor: 'transparent',
                     height: 10,
                 }}
-                onPress={() => setAllMade(round, 10)}
+                onPress={() => setAllMade(round, distance)}
                 checked={isAllIn(distance)}
             />
         </View>
