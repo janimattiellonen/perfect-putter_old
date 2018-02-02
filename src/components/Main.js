@@ -62,9 +62,7 @@ const Main = ({
     return (
         <View style={{
             flex: 1, 
-            flexDirection: 'row', 
-            justifyContent: 'center',
-            alignItems: 'center',
+            flexDirection: 'column', 
             flexWrap: 'wrap',
             marginTop: 50,
             borderWidth: 4,
@@ -73,7 +71,11 @@ const Main = ({
         }}>
             {[10, 15, 20, 25, 30].map ((distance) => {
                 return (
-                    <View>
+                    <View style={{
+                      flex: 1,
+                      flexDirection: 'row',  
+                      alignItems: 'flex-start',
+                    }}>
                         {renderPuttsMade(distance)}
 
                         {renderFirstAndLastMade(distance)}
